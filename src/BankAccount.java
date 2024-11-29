@@ -1,12 +1,9 @@
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 public class BankAccount extends Account {
-    Scanner scanner = new Scanner (System.in); 
     private double balance; 
     private String password; 
-    private List <Transaction> transactionHistory = new ArrayList(); 
+    private ArrayList <Transaction> transactionHistory = new ArrayList<>(); 
     
     public BankAccount(String name, String password) { 
         super(name); 
@@ -39,9 +36,7 @@ public class BankAccount extends Account {
         this.transactionHistory.add(t); 
     }
     //deposit
-    public void deposit(double amount) {
-        System.out.println ("Please Input your password : "); 
-        String pass = scanner.nextLine(); 
+    public void deposit(double amount,String pass) {
         if (this.getPassword().equals (pass)) {
             Transaction transaction = new Transaction (1, amount, this); 
             this.addTransaction(transaction);
@@ -51,9 +46,7 @@ public class BankAccount extends Account {
     }
 
     //withdraw
-    public void withdraw(double amount) {
-        System.out.println ("Please Input your password : "); 
-        String pass = scanner.nextLine(); 
+    public void withdraw(double amount,String pass) {
         if (this.getPassword().equals (pass)) {
             if (checkBalance(amount)) {
                 Transaction transaction = new Transaction (2, amount, this); 
@@ -68,9 +61,7 @@ public class BankAccount extends Account {
     }
 
     //check balance
-    public void checkBalance () {
-        System.out.println ("Please Input your password : "); 
-        String pass = scanner.nextLine(); 
+    public void checkBalance (String pass) {
         if (this.getPassword().equals(pass)) {
             System.out.println ("current balance : " + this.getBalance()); 
         } else {
@@ -79,9 +70,7 @@ public class BankAccount extends Account {
     }
 
     //get transaction history
-    public void transactionHistory () {
-        System.out.println ("Please Input your password : "); 
-        String pass = scanner.nextLine(); 
+    public void transactionHistory (String pass) {
         if (this.getPassword().equals(pass)) {
             System.out.println("current transaction history : "); 
             for (Transaction i : transactionHistory) {
@@ -90,5 +79,12 @@ public class BankAccount extends Account {
         } else {
             System.out.println ("Incorrect Password");
         }
+    }
+
+    @Override
+    public void displayInformation () {
+        System.out.println ("The Name of Account Holder : " + this.getaccountHolder()) ;
+        System.out.println ("The Account number : " + this.getaccountNumber()); 
+        System.out.println ("Current Balance : " + this.getBalance()); 
     }
 }
